@@ -1,50 +1,40 @@
 <template>
-  <div class="container">
-    <div class="left">
-      <img src="../assets/img/left_bottleb.png" height="100%">
-      <!-- <div>
-        <svg class="svg" viewBox="0 0 413 335"  fill="#FFFFFF">
-          <clipPath id="clip-path">
-            <path d="M594.402 0H184.402L4.40259 0.5C-3.63624 130.944 0.626624 200.983 6.90202 325.5L184.402 332.5L369.402 334L593.402 326L594.402 273V225C594.952 199.616 596.865 168.384 596.402 143V69L594.402 0Z" transform="translate(-184.403 0.5)" fill="#C4C4C4"/>
-          </clipPath>
-          <image clip-path="url(#clip-path)" :xlink:href="require(`../assets/img/${firstTeam.id}.png`)"  :src="require(`../assets/img/${firstTeam.id}.png`)" alt="Image" class="svg__image" />
-        </svg>
-      </div> -->
+  <div class="LiveCommentary--container">
+    <div class="right--bottle">
+      <img src="../assets/img/he-bottle.png" alt="">
     </div>
-    <div class="content">
-      <div class="top">
-        <img src="../assets/img/vea.svg" width="100%">
-        <p>{{minutes[0]}}{{minutes[1]}}:{{seconds[0]}}{{seconds[1]}}</p>
+    <div class="left--bottle">
+      <img src="../assets/img/he-bottle.png" alt="">
+    </div>
+    <div class="top">
+      <p>68:09</p>
+    </div>
+    
+    <div class="mid">
+      <div>
+        Powered by: 
+        <img src="../assets/img/gnn-logo.png" alt="">
       </div>
-      <div class="center">
-        <div class="t">
-          {{firstTeam.name}} vs {{secondTeam.name}} - Live
-        </div>
-        <div class="b">
-          <div>
-            <p class="time">{{ comment.minute }}"</p> <p>{{ comment.text }}</p>
-          </div>
+      <div class="comment">
+        <div class="head">UEFA CHAMPIONS LEAGUE - LIVE</div>
+        <div class="body">
+          <div class="time">65"</div>
+          <div class="co">J.Milner takes the Corner Kick for Liverpool...</div>
         </div>
       </div>
-      <div class="bottom">
-        <img src="../assets/img/xea.svg" width="100%">
-        <div class="score">
-          <img :src="require(`../assets/img/${firstTeam.id}.png`)" class="circle">
-          <p>{{ firstTeam.score }} - {{ secondTeam.score }}</p>
-          <img :src="require(`../assets/img/${secondTeam.id}.png`)" class="circle">
-        </div>
+      <div>
+        UEFA Champions League Sponsors |
+        <img src="../assets/img/heineken-logo.png" alt="">
       </div>
     </div>
-    <div class="right">
-      <img src="../assets/img/right_bottleb.png" height="100%">
-      <!-- <div> 
-        <svg class="svg" viewBox="0 0 438 335"  fill="#FFFFFF">
-          <clipPath id="clip-path2">
-            <path d="M594.402 0H184.402L4.40259 0.5C-3.63624 130.944 0.626624 200.983 6.90202 325.5L184.402 332.5L369.402 334L593.402 326L594.402 273V225C594.952 199.616 596.865 168.384 596.402 143V69L594.402 0Z" transform="translate(596.474 0.5) scale(-1 1)" fill="#C4C4C4"/>
-          </clipPath>
-          <image clip-path="url(#clip-path2)" :xlink:href="require(`../assets/img/${secondTeam.id}.png`)"  :src="require(`../assets/img/${secondTeam.id}.png`)" alt="Image" class="svg__image" />
-        </svg>
-      </div> -->
+
+    <div class="bottom">
+      <img src="" alt="">
+      <div class="div">
+        <span>HT</span>
+        <p><span>1</span> - <span>1</span></p>
+      </div>
+      <img src="" alt="">
     </div>
   </div>
 </template>
@@ -102,5 +92,167 @@
 </script>
 
 <style lang="scss">
-@import '../sass/live_commentary.scss'
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,900');
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src:url(../assets/fonts/HelveticaNeue.ttf) format('truetype');
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .LiveCommentary--container {
+    height: 100vh;
+    background-image: url(../assets/img/bg-grass.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .right--bottle {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      img {height: auto; width: 14vw;}
+    }
+    .left--bottle {
+      position: absolute;
+      top: 0;
+      left: 25px;
+      img {height: auto; width: 14vw;}
+    }
+    .top {
+      width: 450px;
+      height: 145px;
+      background-image: url(../assets/img/toptime.svg);
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 95px;
+        color: #FFFFFF;
+      }
+    }
+    .bottom {
+      width: 800px;
+      height: 185px;
+      background-image: url(../assets/img/bottomscore1.svg);
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      background-size: 100% auto;
+      padding: 25px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+
+      img {width: 30%; height: auto;}
+      .div {
+        text-align: center;
+        width: 40%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 95px;
+        color: #102C55;
+        span {
+          font-size: 36px;
+          letter-spacing: normal;
+        }
+        p {
+          span {font-size: 95px;}
+          text-align: center;
+          margin: 0;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+        }
+      }
+    }
+    .mid {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      div {
+        color: #ffffff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 26px;
+        img {margin: 0 20px;}
+        &:not(.comment) {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+      .comment {
+        width: 100%;
+        position: relative;
+        margin-top: 60px;
+        margin-bottom: 15px;
+        .head {
+          width: 60%;
+          height: 75px;
+          position: absolute;
+          top: -45px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #122649;
+          box-shadow: 1.9px 5.7px 6px rgba(16, 45, 87, 0.22);
+          text-transform: uppercase;
+          font-family: 'Helvetica Neue';
+          font-size: 55px;
+          color: #FFFFFF;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .body {
+          width: 100%;
+          padding-top: 50px;
+          border-radius: 10px;
+          background: #FFFFFF;
+          padding: 50px;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          box-sizing: border-box;
+          .time, .co {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: bold;
+            line-height: 66px;
+            font-size: 48.5895px;
+            color: #102C55;
+          }
+          .time {width: 15%;}
+          .co { padding: 0 25px;}
+        }
+      }
+    }
+  }
 </style>

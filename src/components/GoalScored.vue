@@ -1,15 +1,6 @@
 <template>
   <transition name="fade">
   	<div class="container">
-      <div class="top">
-        <div class="fifa-s">
-          <img src="../assets/img/rectangle.png" id="cup" >
-          <img src="../assets/img/typo.png" id="type">
-        </div>
-        <div class="coke-ish">
-          <img src="../assets/img/coke-flat.png" alt="" id="coke-ish">
-        </div>
-      </div>
       <div class="bottom">
         <div class="left">
           <div class="t">
@@ -28,18 +19,11 @@
             <span class="ap" id="ap3">!</span>
           </div>
           <div class="b">
-            <p>{{ time }}' <img src="../assets/img/ball.png" alt="" id="ball"> {{ score }} <br> <span>ASSIST - <b>{{ assist }}.</b></span></p>
+            <p>{{ time }}' <!-- <img src="../assets/img/ball.png" alt="" id="ball"> --> {{ score }} <br> <span>ASSIST - <b>{{ assist }}.</b></span></p>
           </div>
         </div>
         <div class="right">
-          <img src="../assets/img/coke-bottle-copy.png" alt="" id="coke-bottle">
-          <!-- <svg class="svg" viewBox="0 0 183 118" fill="#FFFFFF">
-            <clipPath id="clip-path">
-              <path d="M169.719 0L10.2187 1C4.54612 27.0102 1.39997 42.3545 0.218719 69.5C-0.443918 85.8844 0.547873 95.1154 1.2187 113.5C61.028 117.34 101.666 117.367 182.219 115V91V74V65.5V58.5L180.719 48.5L178.219 37L176.219 25.5L173.719 15.5L171.719 7.5L169.719 0Z" transform="translate(0.281281 0.5)" fill="#C4C4C4"/>
-            </clipPath>
-            -<image clip-path="url(#clip-path)" :xlink:href="localTeam.flag"  :src="localTeam.flag" alt="Image" width="100%" class="svg__image" />-
-            <image clip-path="url(#clip-path)" :xlink:href="require(`../assets/img/${team}.png`)"  :src="require(`../assets/img/${team}.png`)" alt="Image" width="100%" class="svg__image" />
-          </svg> -->
+          <img src="../assets/img/he-bottle.png" alt="" id="coke-bottle">
         </div>
       </div>
     </div>
@@ -58,5 +42,73 @@
 </script>
 
 <style lang="scss">
-@import '../sass/goal_page.scss'
+@import '../sass/partials/_goal_page_effect';
+@font-face {
+    font-family: 'blowbrush';
+    src:url(../assets/fonts/blowbrush.ttf) format('truetype');
+}
+
+body {
+  margin: 0;
+  color: #fff;
+  width: 100%;
+  height: 100vh;
+  background: red;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  background-image: url(../assets/img/bg-grass.jpg);
+  background-size: cover;
+}
+
+
+.container {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+
+    #cup {height: 120px;}
+    #type {height: 80px;}
+    #coke-ish {height: 100px;}
+  }
+
+  .bottom {
+    display: inherit;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+    #coke-bottle {height: 650px;}
+
+    .left {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .right {
+      width: 15%;
+      position: relative;
+      transform-origin: center;
+      animation: swing 5s 0s both infinite;
+
+      svg {
+        position: absolute;
+        left: 0;
+        width: 195px;
+        top: 50%;
+        transform: translateY(-55%);
+      }
+    }
+  }
+}
 </style>

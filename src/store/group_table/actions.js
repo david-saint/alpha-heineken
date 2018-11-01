@@ -3,7 +3,7 @@ export default {
 	getGroupInfo({ commit, rootState }) {
 		function getGroup() {
 			// build the url
-			const url = `https://soccer.sportmonks.com/api/v2.0/standings/season/892?api_token=${rootState.token}`;
+			const url = `https://soccer.sportmonks.com/api/v2.0/standings/season/${rootState.season_id}?api_token=${rootState.token}`;
 			// query the url
 			axios.get(url)
 				.then(response => {

@@ -1,161 +1,123 @@
 <template>
-	<div>
-    <!-- The Time -->
-    <center>
+	<div class="MatchPossession--container">
+    <div class="right--bottle">
+      <img src="../assets/img/he-bottle.png" alt="">
+    </div>
+    <div class="left--bottle">
+      <img src="../assets/img/he-bottle.png" alt="">
+    </div>
+    <div class="top">
       <div class="timebox">{{ minutes[0] }}</div>
       <div class="timebox">{{ minutes[1] }}</div>
       <div class="separator">:</div>
       <div class="timebox">{{ seconds[0] }}</div>
       <div class="timebox">{{ seconds[1] }}</div>
-    </center>
-
-    <center>
-      <div class="container">
-        <div class="crown">
-          <img src="../assets/img/crown.png" class="country">
-          <div class="c" :style="{backgroundImage: `url(${require(`../assets/img/${firstTeam.id}.png`)})`}"></div>
-        </div>
-        <div class="grid-container">
-          <div class="grid-item home">{{ firstTeam.score }}</div>
-          <div class="grid-item goal tesco">
-            <img src="../assets/svg/goal.svg" class="goal" alt="Goal Post">
-          </div>
-          <div class="grid-item away away">{{ secondTeam.score }}</div>
-          <div class="grid-item possession">
-            <strong class="possession">{{ firstTeam.possession }}%</strong>
-          </div>
-          <div class="grid-item asda">
-            <img src="../assets/svg/p.svg" class="players">
-          </div>
-          <div class="grid-item possession">
-            <strong class="possession">{{ secondTeam.possession }}%</strong>
-          </div>
-        </div>
-        <div class="crown">
-          <img src="../assets/img/crown.png" class="country">
-          <div class="c" :style="{backgroundImage: `url(${require(`../assets/img/${secondTeam.id}.png`)})`}"></div>
-        </div>
-      </div>
-    </center>
-
-    <!-- Russia World Cup Image -->
-    <div class="russia">
-      <img src="../assets/svg/russia.svg" alt="Russia 2018">
     </div>
 
-    <!-- cocacola Image-->
-    <div class="cocacola">
-      <img src="../assets/svg/sponsors.svg" class="cocacola" alt="cocacola">
-    </div> 
+    <div class="possession">
+      <div class="lt">
+        <img src="../assets/img/crown.png" alt="">
+      </div>
+      <div class="sco">
+        <div class="t">
+          <span>0</span>
+          <img src="../assets/img/goal.png" alt="">
+          <span>0</span>
+        </div>
+        <div class="b">
+          <span>0%</span>
+          <img src="../assets/img/posp.png" alt="">
+          <span>0%</span>
+        </div>
+      </div>
+      <div class="rt">
+        <img src="../assets/img/crown.png" alt="">
+      </div>
+    </div>
+
+    <div class="foot">
+      <div>
+        Powered by: 
+        <img src="../assets/img/gnn-logo.png" alt="">
+      </div>
+      <div>
+        UEFA Champions League Sponsors |
+        <img src="../assets/img/heineken-logo.png" alt="">
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import { bus } from '../bus'
-  import { router } from '../routes/router'
+import { bus } from '../bus';
+import { router } from '../routes/router';
 
-	export default {
-    data() {
-      return {
-        minute: '',
-        second: ''
-      }
-    },
+export default {
+  data() {
+    return {
+      minute: '',
+      second: '',
+    };
+  },
 
-    beforeCreate() {
-      this.$store.dispatch('getMatchStat');
-    },
+  beforeCreate() {
+    this.$store.dispatch('getMatchStat');
+  },
 
-    mounted() {
-      // listen for the goal-scored event
-      bus.$on('goal-scored', (goals) => {
-        // get the count of the goals
-        let count = this.$store.getters.matchGoalsCount;
-        // get the score 
-        let score = goals.player_name ? goals.player_name : 'null';
-        // get the assist
-        let assist = goals.player_assist_name ? goals.player_assist_name : 'null';
-        // get the time
-        let time = goals.minute;
-        // get the team id
-        let team = goals.team_id;
-        // redirect to the goal page
-       window.location.href = `/goal/${score}/${assist}/${time}/${team}/possession`;
-      });
-    },
+  mounted() {
+    // listen for the goal-scored event
+    bus.$on('goal-scored', (goals) => {
+      // get the count of the goals
+      const count = this.$store.getters.matchGoalsCount;
+      // get the score
+      const score = goals.player_name ? goals.player_name : 'null';
+      // get the assist
+      const assist = goals.player_assist_name ? goals.player_assist_name : 'null';
+      // get the time
+      const time = goals.minute;
+      // get the team id
+      const team = goals.team_id;
+      // redirect to the goal page
+      window.location.href = `/goal/${score}/${assist}/${time}/${team}/possession`;
+    });
+  },
 
-    computed: {
-      firstTeam() {
-        return this.$store.getters.matchFirstTeam
-      },
-      secondTeam() {
-        return this.$store.getters.matchSecondTeam
-      },
-      minutes() {
-        let m = (this.$store.getters.matchTime.minute) ? ((this.$store.getters.matchTime.minute < 10) ? '0' + this.$store.getters.matchTime.minute.toString() : this.$store.getters.matchTime.minute.toString()) : '00' ;
-        return [...m]
-      },
-      seconds() {
-        let s = (this.$store.getters.matchTime.second) ? ((this.$store.getters.matchTime.second < 10 ) ? '0' + this.$store.getters.matchTime.second.toString() : this.$store.getters.matchTime.second.toString()) : '00';
-        return ([...s]);
-      }
+  computed: {
+    firstTeam() {
+      return this.$store.getters.matchFirstTeam;
     },
-	}
+    secondTeam() {
+      return this.$store.getters.matchSecondTeam;
+    },
+    minutes() {
+      const m = (this.$store.getters.matchTime.minute) ? ((this.$store.getters.matchTime.minute < 10) ? '0' + this.$store.getters.matchTime.minute.toString() : this.$store.getters.matchTime.minute.toString()) : '00' ;
+      return [...m];
+    },
+    seconds() {
+      const s = (this.$store.getters.matchTime.second) ? ((this.$store.getters.matchTime.second < 10 ) ? '0' + this.$store.getters.matchTime.second.toString() : this.$store.getters.matchTime.second.toString()) : '00';
+      return ([...s]);
+    },
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,800');
 	body {
-    background-image: url('../assets/img/bg.png');
+    background-image: url('../assets/img/bg-grass.jpg');
     background-color: #ED2F23;
     margin-top: -10px;
   }
 
-  .russia {
-    position: absolute;
-    bottom: 10px;
-    padding: 25px;
-  }
-
-  .crown .c {
-    position: absolute;
-    top: 38px;
-    left: 33px;
-    height: 276px;
-    width: 284px;
-    background-color: red;
-    border-radius: 50%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  .russia img {
-    width: 550px;
-  }
-
-  .cocacola {
-    position: absolute;
-    bottom: 10px;
-    right: 0;
-    padding: 25px;
-  }
-  .crown {
-    margin: 0 50px;
-    position: relative;
-  }
-  .cocacola img {
-    width: 650px;
-  }
-
   .timebox {
-    width:100px;
-    height:130px;
-    background:#ffffff;
+    width: 100px;
+    height: 130px;
+    background: #ffffff;
     padding: 5px;
     display: inline-block;
     position: relative;
     text-align: center;
-    color: #EB2F23;
+    color: #346B19;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -167,7 +129,7 @@
   .separator {
     color: #ffffff;
     display: inline-block;
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: normal;
     line-height: 97px;
@@ -177,84 +139,105 @@
     text-align: center;
   }
 
-  .goal {
-    display: inline-block;
-  }
-
-  .country {
-    width: 350px;
-    height: 350px;
-  }
-
-  .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 10px;
-    in-width: 0;
-  }
-
-  .grid-item {
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-    bottom: 10px;
-    /* border: 1px solid rgba(0, 0, 0, 0.8); */
-  }
-
-  .goal {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .tesco {
-    border-bottom: 1px solid #fff;
-  }
-  
-  .players {
-    width: 150px;
-    height: 150px;
-    margin-top: -35px;
-  }
-
-  .home {
-    font-family: Montserrat;
-    font-size: 110px;
-    letter-spacing: 35.7442px;
-    color: #FFFFFF;
-    border-bottom: 1px solid #fff;
-  }
-
-  .away {
-    font-family: Montserrat;
-    font-size: 110px;
-    letter-spacing: 35.7442px;
-    color: #FFFFFF;
-    border-bottom: 1px solid #fff;
-  }
-
-  .possession {
-    Font-Family: Montserrat;
-    Font-Size: 50;
-    top: -40;
-    Font-Style: normal;
-    color: #ffffff;
-    font-weight: bolder;
-    font-style: bolder;
-    font-size: 80.096px;
-  }
-
-  .container {
+  .MatchPossession--container {
+    height: 100vh;
+    background-image: url(../assets/img/bg-grass.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    position: relative;
     display: flex;
-    justify-content: space-around;
-    position: fixed;
-    top: -200px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 200px;
-    height: 100px;
-    margin: auto;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .right--bottle {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      img {height: 100vh; width: auto;}
+    }
+    .left--bottle {
+      position: absolute;
+      top: 0;
+      left: 25px;
+      img {height: 100vh; width: auto;}
+    }
+    .possession {
+      height: 375px;
+      width: 75%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .lt,.rt {
+        height: 100%;
+        width: 365px;
+        padding: 15px;
+        img {width: 100%; height: auto;}
+      }
+      .sco {
+        width: calc(100% - 730px);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .t,.b {
+          height: 50%;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+        }
+        .t {
+          align-items: center;
+          border-bottom: 2px solid #ffffff;
+          span {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: normal;
+            line-height: 121px;
+            font-size: 200px;
+            color: #FFFFFF;
+          }
+        }
+        .b {
+          align-items: baseline;
+          span {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 900;
+            line-height: 86px;
+            font-size: 100px;
+            color: #FFFFFF;
+          }
+        }
+      }
+    }
+    .foot {
+      width: calc(100vw - 600px);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 26px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 30px;
+        color: #ffffff;
+        img {margin: 0 20px;}
+      }
+    }
   }
+
+
+  
   @media only screen and (max-height: 500px) {
     .timebox {width: 50px; height: 65px; padding: 3px; font-size: 50px;}
     .separator {line-height: 0px; font-size: 60px;}
