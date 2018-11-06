@@ -16,22 +16,24 @@
 
     <div class="possession">
       <div class="lt">
-        <img src="../assets/img/crown.png" alt="">
+        <img :src="firstTeam.logo" alt="" class="abs">
+        <!-- <img src="../assets/img/crown.png" alt=""> -->
       </div>
       <div class="sco">
         <div class="t">
-          <span>0</span>
+          <span>{{ firstTeam.score }}</span>
           <img src="../assets/img/goal.png" alt="">
-          <span>0</span>
+          <span>{{ secondTeam.score }}</span>
         </div>
         <div class="b">
-          <span>0%</span>
+          <span>{{ firstTeam.possession }}%</span>
           <img src="../assets/img/posp.png" alt="">
-          <span>0%</span>
+          <span>{{ secondTeam.possession }}%</span>
         </div>
       </div>
       <div class="rt">
-        <img src="../assets/img/crown.png" alt="">
+        <img :src="secondTeam.logo" alt="" class="abs">
+        <!-- <img src="../assets/img/crown.png" alt=""> -->
       </div>
     </div>
 
@@ -108,7 +110,9 @@ export default {
     background-color: #ED2F23;
     margin-top: -10px;
   }
-
+  img.abs {
+    // position: absolute;
+  }
   .timebox {
     width: 100px;
     height: 130px;

@@ -7,7 +7,7 @@
       <img src="../assets/img/he-bottle.png" alt="">
     </div>
     <div class="top">
-      <p>68:09</p>
+      <p>{{ minutes.join('') }}:{{ seconds.join('') }}</p>
     </div>
     
     <div class="mid">
@@ -18,8 +18,8 @@
       <div class="comment">
         <div class="head">UEFA CHAMPIONS LEAGUE - LIVE</div>
         <div class="body">
-          <div class="time">65"</div>
-          <div class="co">J.Milner takes the Corner Kick for Liverpool...</div>
+          <div class="time">{{ comment.minute }}"</div>
+          <div class="co">{{ comment.text }}</div>
         </div>
       </div>
       <div>
@@ -29,12 +29,12 @@
     </div>
 
     <div class="bottom">
-      <img src="" alt="">
+      <img :src="firstTeam.logo" alt="">
       <div class="div">
         <span>HT</span>
-        <p><span>1</span> - <span>1</span></p>
+        <p><span>{{ firstTeam.score }}</span> - <span>{{ secondTeam.score }}</span></p>
       </div>
-      <img src="" alt="">
+      <img :src="secondTeam.logo" alt="">
     </div>
   </div>
 </template>
@@ -71,10 +71,10 @@
 
     computed: {
       firstTeam() {
-        return this.$store.getters.matchFirstTeam
+        return this.$store.getters.matchFirstTeam;
       },
       secondTeam() {
-        return this.$store.getters.matchSecondTeam
+        return this.$store.getters.matchSecondTeam;
       },
       minutes() {
         let m = (this.$store.getters.matchTime.minute) ? ((this.$store.getters.matchTime.minute < 10) ? '0' + this.$store.getters.matchTime.minute.toString() : this.$store.getters.matchTime.minute.toString()) : '00' ;
@@ -157,11 +157,11 @@
       padding: 25px;
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       box-sizing: border-box;
 
-      img {width: 30%; height: auto;}
+      img {width: auto; height: auto; max-height: 90%;}
       .div {
         text-align: center;
         width: 40%;
